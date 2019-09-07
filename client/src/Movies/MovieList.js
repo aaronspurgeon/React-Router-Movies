@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const MovieList = props => {
   const [movies, setMovies] = useState([])
-  console.log(movies);
   useEffect(() => {
     const getMovies = () => {
       axios
@@ -21,18 +20,20 @@ const MovieList = props => {
   }, []);
   
   return (
-    <Link to={ `/movies/${movies}` }>
+    
       <div className="movie-list">
         {movies.map(movie => (
-          <MovieDetails key={movie.id} movie={movie} />
+          <Link to={ `/movies/${movie.id}` }>
+            <MovieDetails key={movie.id} movie={movie} />
+          </Link>
         ))}
       </div>
-    </Link>
+    
   );
 }
 
 function MovieDetails({ movie }) {
-  const { title, director, metascore, stars, id } = movie;
+  const { title, director, metascore, stars } = movie;
   return (
     <div className="movie-card">
         <h2>{title}</h2>
